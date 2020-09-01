@@ -1,5 +1,4 @@
 const express = require("express");
-const createError = require("http-errors");
 const path = require("path");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -12,7 +11,7 @@ const uri = process.env.DB_URI;
 const app = express();
 const clientPath = path.join(__dirname, "../client/build");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -38,10 +37,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use("/api", routerApi);
-
-app.use(function (_, __, next) {
-  next(createError(404));
-});
 
 app.listen(port, () => {
   console.log(`Server is running is ${port}`);

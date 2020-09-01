@@ -1,13 +1,17 @@
 import React from "react";
 import { Grid, Box, Typography, Button, TextField } from "@material-ui/core";
 
-const Form = ({ handleSubmit, textInit }) => {
+const Form = ({ handleSubmit, textInit = "" }) => {
   const [text, setText] = React.useState(textInit);
   const handleChangeText = (e) => {
     setText(e.target.value);
   };
+  const handleSubmitTodo = (e) => {
+    e.preventDefault();
+    handleSubmit(text);
+  };
   return (
-    <form handleSubmit={handleSubmit}>
+    <form onSubmit={handleSubmitTodo}>
       <Typography variant="h3">Create todo item:</Typography>
       <Box my={4}>
         <TextField

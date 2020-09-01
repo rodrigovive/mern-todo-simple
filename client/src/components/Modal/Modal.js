@@ -27,7 +27,6 @@ function TransitionsModal({ open = false, handleClose, children }) {
       className={classes.modal}
       open={open}
       onClose={handleClose}
-      closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500,
