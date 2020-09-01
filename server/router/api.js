@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const { getTodos, addTodo, deleteTodo } = require("../controllers/todo");
 
-router.get("/todo", async (req, res) => {
-  return res.json({ test: 123 });
-});
+router.route("/todo").get(getTodos).post(addTodo);
+
+router.route("/todo/:id").delete(deleteTodo);
 
 module.exports = router;

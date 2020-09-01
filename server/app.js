@@ -1,4 +1,5 @@
 const express = require("express");
+const createError = require("http-errors");
 const path = require("path");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -11,7 +12,7 @@ const uri = process.env.DB_URI;
 const app = express();
 const clientPath = path.join(__dirname, "../client/build");
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
@@ -28,8 +29,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/api", routerApi);
-
 if (process.env.NODE_ENV === "production") {
   // Set static folder
   app.use(express.static(clientPath));
@@ -37,6 +36,8 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(clientPath + "index.html");
   });
 }
+
+app.use("/api", routerApi);
 
 app.use(function (_, __, next) {
   next(createError(404));
