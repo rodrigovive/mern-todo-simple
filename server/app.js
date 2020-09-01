@@ -28,15 +28,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static(clientPath));
-  app.get("*", (_, res) => {
-    res.sendFile(clientPath + "index.html");
-  });
-}
-
 app.use("/api", routerApi);
+// Set static folder
+app.use(express.static(clientPath));
+app.get("*", (_, res) => {
+  res.sendFile(clientPath + "/index.html");
+});
 
 app.listen(port, () => {
   console.log(`Server is running is ${port}`);
