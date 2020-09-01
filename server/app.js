@@ -11,7 +11,7 @@ const uri = process.env.DB_URI;
 const app = express();
 const clientPath = path.join(__dirname, "../client/build");
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
